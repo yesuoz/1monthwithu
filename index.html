@@ -21,18 +21,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
             background-attachment: fixed;
         }
         .parallax-content {
             position: relative;
             background: rgba(255, 255, 255, 0.8);
             padding: 50px;
-            transform: translateY(100vh); /* Başlangıçta metni ekranın dışında tut */
-            transition: transform 0.5s ease-in-out;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
         .parallax-section.active .parallax-content {
-            transform: translateY(0); /* Metni yavaşça yukarı getir */
+            opacity: 1; /* Metni yavaşça göster */
         }
         .parallax-content p {
             font-size: 1.2em;
