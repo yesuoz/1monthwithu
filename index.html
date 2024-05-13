@@ -24,10 +24,17 @@ body, html {
 .text {
   position: absolute;
   bottom: 10px;
+  left: 0;
+  right: 0;
   background: rgba(0, 0, 0, 0.5); /* Yarı saydam siyah arka plan */
   color: #f1f1f1;
   width: 100%;
   padding: 20px;
+  opacity: 0; /* Başlangıçta metin görünmez */
+  transition: opacity 0.5s; /* Opaklık geçişi yumuşatma */
+}
+.container:hover .text {
+  opacity: 1; /* Fare üzerine gelindiğinde metin görünür */
 }
 </style>
 </head>
@@ -100,6 +107,25 @@ Ellerimiz birleşti, kayboldu mesafeler arasında.
 </div>
 
 <!-- Daha fazla fotoğraf ve açıklama ekleyebilirsiniz -->
+
+<script>
+// JavaScript ile kaydırma olayını algılayıp ilgili metni gösterme
+window.onscroll = function() {
+  var textElements = document.querySelectorAll('.text');
+  for (var i = 0; i < textElements.length; i++) {
+    var textElement = textElements[i];
+    var imageElement = textElement.previousElementSibling;
+    var imageRect = imageElement.getBoundingClientRect();
+    if (imageRect.top <= window.innerHeight && imageRect.bottom >= 0) {
+      // Fotoğraf görünürse metni göster
+      textElement.style.opacity = '1';
+    } else {
+      // Fotoğraf görünmezse metni gizle
+      textElement.style.opacity = '0';
+    }
+  }
+};
+</script>
 
 </body>
 </html>
