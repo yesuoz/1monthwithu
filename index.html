@@ -1,52 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parallax Scrolling Sayfası</title>
+    <title>İlgi Çekici Web Sayfası</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             scroll-behavior: smooth;
         }
-        .parallax-section {
+        .image-section {
             position: relative;
-            overflow: hidden;
-            height: 100vh; /* Ekranın tam boyutu */
+            text-align: center;
+            background-color: #f8f8f8;
         }
-        .parallax-background {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .image-section img {
             width: 100%;
-            height: 100%;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
+            height: auto;
         }
-        .parallax-content {
-            position: relative;
+        .text-section {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
             background: rgba(255, 255, 255, 0.8);
-            padding: 50px;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            transform: translateY(100%);
+            transition: transform 0.5s ease-in-out;
         }
-        .parallax-section.active .parallax-content {
-            opacity: 1; /* Metni yavaşça göster */
+        .image-section:hover .text-section {
+            transform: translateY(0);
         }
-        .parallax-content p {
+        .text-section p {
             font-size: 1.2em;
             color: #333;
+            padding: 20px;
+            margin: 0;
         }
     </style>
 </head>
 <body>
 
-<div class="parallax-section" id="section1">
-    <div class="parallax-background" style="background-image: url('foto1.jpg');"></div>
-    <div class="parallax-content">
+<section class="image-section">
+    <img src="foto1.jpg" alt="Görsel 1">
+    <div class="text-section">
         <p>Ay ışığında yürürken buldum seni,
 Gecenin sessizliğinde, yıldızlar şahidi.
 Gümüş bir serap gibi parladın karanlıkta,
@@ -75,13 +72,14 @@ Gecenin huzurunda, seninle yürümek,
 Sessiz adımlarla yürüdük ay ışığında,
 Ellerimiz birleşti, kayboldu mesafeler arasında.
 
+
 </p>
     </div>
-</div>
+</section>
 
-<div class="parallax-section" id="section2">
-    <div class="parallax-background" style="background-image: url('foto2.jpg');"></div>
-    <div class="parallax-content">
+<section class="image-section">
+    <img src="foto2.jpg" alt="Görsel 2">
+    <div class="text-section">
         <p>Ay ışığında yürürken buldum seni,
 Gecenin sessizliğinde, yıldızlar şahidi.
 Gümüş bir serap gibi parladın karanlıkta,
@@ -110,26 +108,12 @@ Gecenin huzurunda, seninle yürümek,
 Sessiz adımlarla yürüdük ay ışığında,
 Ellerimiz birleşti, kayboldu mesafeler arasında.
 
+
 </p>
     </div>
-</div>
+</section>
 
-<!-- Diğer parallax bölümleri -->
-
-<script>
-    // Sayfa kaydırıldığında metinleri görünür hale getir
-    const parallaxSections = document.querySelectorAll('.parallax-section');
-    window.addEventListener('scroll', () => {
-        parallaxSections.forEach((section) => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top < window.innerHeight * 0.75 && rect.bottom >= 0) {
-                section.classList.add('active');
-            } else {
-                section.classList.remove('active');
-            }
-        });
-    });
-</script>
+<!-- Diğer görsel ve metin bölümleri -->
 
 </body>
 </html>
