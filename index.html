@@ -19,28 +19,34 @@ body, html {
 .image {
   width: 100%;
   height: 100%;
-  background-attachment: fixed; /* Kaydırma sırasında sabit kalacak */
+  background-attachment: scroll; /* Kaydırma sırasında hareket edecek */
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain; /* Fotoğrafın orijinal boyutunu koru */
 }
 .text {
   position: absolute;
-  top: 50%;
+  top: 100%; /* Metni başlangıçta gizle */
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   width: 90%;
   color: #fff;
   text-align: center;
+  visibility: hidden; /* Metni gizle */
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+.section:target .text {
+  visibility: visible; /* İlgili bölüm hedeflendiğinde metni göster */
+  opacity: 1;
+  top: 50%; /* Metni ortala */
 }
 </style>
 </head>
 <body>
 
-<div class="section" style="background-image: url('foto1.jpg');">
-  <div class="text" id="text1">Ay ışığında yürürken buldum seni,
+<div class="section" id="section1" style="background-image: url('foto1.jpg');">
+  <div class="text">Ay ışığında yürürken buldum seni,
 Gecenin sessizliğinde, yıldızlar şahidi.
 Gümüş bir serap gibi parladın karanlıkta,
 Kalbimdeki yangını söndüren tek damla.
@@ -71,8 +77,8 @@ Ellerimiz birleşti, kayboldu mesafeler arasında.
 </div>
 </div>
 
-<div class="section" style="background-image: url('foto2.jpg');">
-  <div class="text" id="text2">Ay ışığında yürürken buldum seni,
+<div class="section" id="section2" style="background-image: url('foto2.jpg');">
+  <div class="text">Ay ışığında yürürken buldum seni,
 Gecenin sessizliğinde, yıldızlar şahidi.
 Gümüş bir serap gibi parladın karanlıkta,
 Kalbimdeki yangını söndüren tek damla.
@@ -104,35 +110,6 @@ Ellerimiz birleşti, kayboldu mesafeler arasında.
 </div>
 
 <!-- Daha fazla bölüm ve metin ekleyebilirsiniz -->
-
-<script>
-// Her bölümün yüksekliğini ve metinlerin opaklığını ayarlayan fonksiyon
-function adjustOpacity() {
-  var sections = document.querySelectorAll('.section');
-  var windowHeight = window.innerHeight;
-
-  sections.forEach(function(section, index) {
-    var text = section.querySelector('.text');
-    var sectionTop = section.offsetTop;
-    var sectionHeight = section.offsetHeight;
-    var scrollY = window.scrollY;
-
-    // Kullanıcı bu bölüme geldiğinde metnin opaklığını ayarla
-    if (scrollY >= sectionTop - windowHeight && scrollY < sectionTop + sectionHeight) {
-      var opacity = (scrollY - sectionTop + windowHeight) / windowHeight;
-      text.style.opacity = Math.min(opacity, 1);
-    } else {
-      text.style.opacity = 0;
-    }
-  });
-}
-
-// Pencere kaydırıldığında fonksiyonu çağır
-window.addEventListener('scroll', adjustOpacity);
-
-// İlk yüklemede fonksiyonu çağır
-adjustOpacity();
-</script>
 
 </body>
 </html>
