@@ -27,7 +27,7 @@
             transform: translateY(100%);
             transition: transform 0.5s ease-in-out;
         }
-        .image-section:hover .text-section {
+        .image-section.active .text-section {
             transform: translateY(0);
         }
         .text-section p {
@@ -41,7 +41,7 @@
 <body>
 
 <section class="image-section">
-    <img src="foto1.jpg" alt="Görsel 1">
+    <img src="foto11.jpg" alt="Görsel 1">
     <div class="text-section">
         <p>Ay ışığında yürürken buldum seni,
 Gecenin sessizliğinde, yıldızlar şahidi.
@@ -70,7 +70,6 @@ Gecenin huzurunda, seninle yürümek,
 
 Sessiz adımlarla yürüdük ay ışığında,
 Ellerimiz birleşti, kayboldu mesafeler arasında.
-
 
 </p>
     </div>
@@ -107,12 +106,26 @@ Gecenin huzurunda, seninle yürümek,
 Sessiz adımlarla yürüdük ay ışığında,
 Ellerimiz birleşti, kayboldu mesafeler arasında.
 
-
 </p>
     </div>
 </section>
 
 <!-- Diğer görsel ve metin bölümleri -->
+
+<script>
+    // Sayfa kaydırıldığında metinleri görünür hale getir
+    const imageSections = document.querySelectorAll('.image-section');
+    window.addEventListener('scroll', () => {
+        imageSections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                section.classList.add('active');
+            } else {
+                section.classList.remove('active');
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
